@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
+import {Route, HashRouter, Switch, Redirect} from "react-router-dom";
 import './App.css';
 import Employees from "./components/Employees";
 import EmployeesLog from "./components/EmployeesLog";
@@ -21,7 +21,7 @@ function App(props) {
 
 
   return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <div className="App">
             <Switch>
 
@@ -39,7 +39,7 @@ function App(props) {
 
             </Switch>
         </div>
-      </BrowserRouter>
+      </HashRouter>
 
   );
 }
