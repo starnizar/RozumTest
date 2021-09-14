@@ -1,0 +1,8 @@
+export const SET_EMPLOYEES = 'SET_EMPLOYEES'
+export const SET_WORKLOG = 'SET_WORKLOG'
+export const GET_INTRUDERS = 'GET_INTRUDERS'
+export const SHOW_LOADING = 'SHOW_LOADING'
+export const HIDE_LOADING = 'HIDE_LOADING'
+export const START_ANALYZE = 'START_ANALYZE'
+export const STOP_ANALYZE = 'STOP_ANALYZE'
+export const SELECT_MEDIC = 'SELECT_MEDIC'
