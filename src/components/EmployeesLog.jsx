@@ -11,11 +11,11 @@ const EmployeesLog = (props) => {
     useEffect(() => {
 
         if (props.selected.id === undefined){
-            return location.push('/')
+            location.push('/')
         }
         if (!props.intruders.length) {
             props.startAnalyze()
-            setTimeout(()=>props.getIntruders(findIntruders(props.workLog)))
+            props.getIntruders(findIntruders(props.workLog)) // цикл замораживает страницу, не знаю как сделать его асинхронным
         }
 
         function findIntruders(worklog) {
@@ -24,7 +24,7 @@ const EmployeesLog = (props) => {
             let intruders = []
 
             for (let j=6; today < tomorrow; today += 1000) {
-                for (let i=0; i < 44; i++) {
+                for (let i=0; i < worklog.length; i++) {
                     if (today === Number(new Date(worklog[i].to))) {
                         j++
                     }
@@ -42,7 +42,7 @@ const EmployeesLog = (props) => {
     })
 
     if (props.analyzing) {
-        return <div><img src={loader} alt="Analyzing data..."/></div>
+        return <div className='loader'><img src={loader} alt="Analyzing data..."/></div>
     }
 
 

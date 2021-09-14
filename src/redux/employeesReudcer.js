@@ -14,7 +14,7 @@ const initialState = {
     workLog: [],
     intruders: [],
     selected: {},
-    analyzing: true,
+    analyzing: false,
     loading: true
 }
 
