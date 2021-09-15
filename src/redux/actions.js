@@ -4,8 +4,6 @@ import {
     SET_EMPLOYEES,
     SET_WORKLOG,
     SHOW_LOADING,
-    START_ANALYZE,
-    STOP_ANALYZE
 } from "./types";
 
 
@@ -45,17 +43,5 @@ export function selectMedic(medic) {
     return {
         type: SELECT_MEDIC,
         payload: medic
-    }
-}
-
-export function startAnalyze() {
-    return {
-        type: START_ANALYZE
-    }
-}
-
-export function stopAnalyze() {
-    return {
-        type: STOP_ANALYZE
     }
 }

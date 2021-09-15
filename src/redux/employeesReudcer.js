@@ -4,8 +4,6 @@ import {
     SET_EMPLOYEES,
     SET_WORKLOG,
     SHOW_LOADING,
-    START_ANALYZE,
-    STOP_ANALYZE
 } from "./types";
 
 
@@ -14,7 +12,6 @@ const initialState = {
     workLog: [],
     intruders: [],
     selected: {},
-    analyzing: false,
     loading: true
 }
 
@@ -30,10 +27,6 @@ export const employeesReducer = (state=initialState, action) => {
             return {...state, loading: false}
         case GET_INTRUDERS:
             return {...state, intruders: [...action.payload]}
-        case START_ANALYZE:
-            return {...state, analyzing: true}
-        case STOP_ANALYZE:
-            return {...state, analyzing: false}
         case SELECT_MEDIC:
             return {...state, selected: {...action.payload}}
         default: return state

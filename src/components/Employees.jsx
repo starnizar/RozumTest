@@ -8,34 +8,36 @@ const Employees = (props) => {
 
     const location = useHistory()
 
-    if (props.loading) {
-        return <div className='loader'><img src={loader} alt="Loading..."/></div>
-    }
-
     const fioHandler = medic => {
         props.selectMedic(medic)
         location.push('/employees-log')
     }
 
     return (
-        <div className='employeesWrapper'>
-            <table>
-                <tbody>
-                <tr className='tHeader'>
-                    <th>id</th>
-                    <th>ФИО</th>
-                    <th>Дата рождения</th>
-                </tr>
-                {props.employees.map( item => (
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td className='fio' onClick={() => fioHandler(item)}> {item.lastName} {item.firstName} {item.middleName}</td>
-                        <td>{item.birthDate.split('-').reverse().join('.')}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
+        <>
+            {props.loading
+                ? <div className='loader'><img src={loader} alt="Loading..."/></div>
+                :
+                <div className='employeesWrapper'>
+                    <table>
+                        <tbody>
+                        <tr className='tHeader'>
+                            <th>id</th>
+                            <th>ФИО</th>
+                            <th>Дата рождения</th>
+                        </tr>
+                        {props.employees.map( item => (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td className='fio' onClick={() => fioHandler(item)}> {item.lastName} {item.firstName} {item.middleName}</td>
+                                <td>{item.birthDate.split('-').reverse().join('.')}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </>
     )
 }
 

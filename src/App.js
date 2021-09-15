@@ -32,11 +32,12 @@ function App(props) {
                 <Route exact path='/employees'>
                     <Employees />
                 </Route>
+            </Switch>
 
+            <Switch>
                 <Route path='/employees-log'>
                     <EmployeesLog />
                 </Route>
-
             </Switch>
         </div>
       </HashRouter>
