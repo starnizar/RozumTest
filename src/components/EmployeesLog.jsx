@@ -7,41 +7,48 @@ import loader from '../assets/img/loader2.svg'
 const EmployeesLog = (props) => {
 
     const location = useHistory()
-    const [analyzing, setAnalyzing] = useState(true)
+    const [analyzing, setAnalyzing] = useState(false)
 
     useEffect(() => {
-
 
         if (props.selected.id === undefined){
             location.push('/')
         }
         if (!props.intruders.length) {
-            props.getIntruders(findIntruders(props.workLog)) // цикл замораживает страницу, не знаю как сделать его асинхронным
+            setAnalyzing(true)
+            findIntruders(props.workLog).then((intruders)=> {
+                props.getIntruders(intruders)
+                setAnalyzing(false)
+            })
         }
-        setInterval(()=>setAnalyzing(false), 1000)
+
 
         function findIntruders(worklog) {
-            let tomorrow = Number(new Date('2021-03-04 23:59:59'));
-            let today = Number(new Date('2021-03-04 00:00:00'));
-            let medics = 6
-            let intruders = []
+            return new Promise((resolve, reject) => {
+                setTimeout(()=> {
+                    let tomorrow = Number(new Date('2021-03-04 23:59:59'));
+                    let today = Number(new Date('2021-03-04 00:00:00'));
+                    let medics = 6
+                    let intruders = []
 
-            for (; today < tomorrow; today += 1000) {
-                for (let i=0; i < worklog.length; i++) {
-                    if (today === Number(new Date(worklog[i].to))) {
-                        medics++
-                    }
-                    if (today === Number(new Date(worklog[i].from))) {
-                        medics--
-                        if (medics<3) {
-                            intruders.push(worklog[i])
+                    for (; today < tomorrow; today += 1000) {
+                        for (let i=0; i < worklog.length; i++) {
+                            if (today === Number(new Date(worklog[i].to))) {
+                                medics++
+                            }
+                            if (today === Number(new Date(worklog[i].from))) {
+                                medics--
+                                if (medics<3) {
+                                    intruders.push(worklog[i])
+                                }
+                            }
                         }
                     }
-                }
-            }
-            return intruders
+                    resolve(intruders)
+                }, 2000)
+            })
         }
-    }, [])
+    }, [props, location])
 
 
     const checkedLogs = props.workLog.filter(item => item.employee_id === props.selected.id).map(log => {
